@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { AnimatePresence } from "framer-motion";
 import type { Bookmark } from "@/lib/types";
 import { BookmarkRow } from "./bookmark-row";
 import { TagFilter } from "./tag-filter";
@@ -35,16 +34,14 @@ export function Feed({ bookmarks }: { bookmarks: Bookmark[] }) {
       />
 
       <div className="space-y-6">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((bookmark, i) => (
-            <BookmarkRow
-              key={bookmark.id}
-              bookmark={bookmark}
-              index={i}
-              onTagClick={setActiveTag}
-            />
-          ))}
-        </AnimatePresence>
+        {filtered.map((bookmark, i) => (
+          <BookmarkRow
+            key={bookmark.id}
+            bookmark={bookmark}
+            index={i}
+            onTagClick={setActiveTag}
+          />
+        ))}
 
         {filtered.length === 0 && (
           <div className="py-20 text-center">

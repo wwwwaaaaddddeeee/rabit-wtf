@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import type { Bookmark } from "@/lib/types";
 import { formatDate } from "@/lib/time";
 
@@ -14,21 +13,12 @@ export function BookmarkRow({
   onTagClick: (tag: string) => void;
 }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.35,
-        delay: index * 0.04,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
-      className="group"
-    >
+    <article className="group">
       <a
         href={bookmark.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex gap-4 py-5 transition-opacity duration-200 hover:opacity-70"
+        className="flex gap-4 py-5 transition-opacity duration-200 hover:opacity-70 cursor-pointer"
       >
         {bookmark.cover && (
           <div className="shrink-0 w-14 h-14 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 ring-1 ring-zinc-200/50 dark:ring-zinc-700/50">
@@ -76,6 +66,6 @@ export function BookmarkRow({
           ))}
         </div>
       )}
-    </motion.article>
+    </article>
   );
 }

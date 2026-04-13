@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Fix iOS touch events for interactive elements */
+button, [role="button"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
 @theme inline {
   --font-sans: var(--font-geist-sans);
 }

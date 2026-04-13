@@ -1,7 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-
 export function TagFilter({
   tags,
   activeTag,
@@ -16,20 +14,14 @@ export function TagFilter({
 
   return (
     <div className="flex flex-wrap gap-2 mb-10">
-      <AnimatePresence>
-        {activeTag && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.15 }}
-            onClick={() => onTagSelect(null)}
-            className="text-[13px] px-3 py-1 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium cursor-pointer hover:bg-zinc-700 dark:hover:bg-zinc-300 transition-colors duration-150"
-          >
-            &times; {activeTag}
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {activeTag && (
+        <button
+          onClick={() => onTagSelect(null)}
+          className="text-[13px] px-3 py-1 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium cursor-pointer hover:bg-zinc-700 dark:hover:bg-zinc-300 transition-colors duration-150"
+        >
+          &times; {activeTag}
+        </button>
+      )}
       {visible
         .filter((t) => t.tag !== activeTag)
         .slice(0, 12)
