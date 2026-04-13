@@ -1,12 +1,23 @@
 import { fetchAllBookmarks } from "./raindrop";
 import { enrichWithTags } from "./tags";
+import { MOCK_BOOKMARKS } from "./mock-data";
 import type { Bookmark } from "./types";
 
 let cachedBookmarks: Bookmark[] | null = null;
 let cacheTimestamp = 0;
 const CACHE_TTL = 120_000;
 
+function hasValidEnv(): boolean {
+  const token = process.env.RAINDROP_TOKEN;
+  const collectionId = process.env.RAINDROP_COLLECTION_ID;
+  return !!token && !token.startsWith("your_") && !!collectionId && !collectionId.startsWith("your_");
+}
+
 export async function getBookmarks(): Promise<Bookmark[]> {
+  if (!hasValidEnv()) {
+    return MOCK_BOOKMARKS;
+  }
+
   const now = Date.now();
 
   if (cachedBookmarks && now - cacheTimestamp < CACHE_TTL) {

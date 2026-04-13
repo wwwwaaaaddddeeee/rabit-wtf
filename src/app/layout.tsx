@@ -10,9 +10,11 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "rabbit hole",
   description: "Things found on the internet.",
+  metadataBase: new URL("https://rabit.wtf"),
   openGraph: {
     title: "rabbit hole",
     description: "Things found on the internet.",
+    url: "https://rabit.wtf",
     type: "website",
   },
   twitter: {
