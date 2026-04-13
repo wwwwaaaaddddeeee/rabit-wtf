@@ -11,10 +11,11 @@ export function TagFilter({
   activeTag: string | null;
   onTagSelect: (tag: string | null) => void;
 }) {
-  if (tags.length === 0) return null;
+  const visible = tags.filter((t) => t.count >= 2 || t.tag === activeTag);
+  if (visible.length === 0) return null;
 
   return (
-    <div className="flex flex-wrap gap-1.5 mb-8">
+    <div className="flex flex-wrap gap-2 mb-10">
       <AnimatePresence>
         {activeTag && (
           <motion.button
@@ -23,23 +24,23 @@ export function TagFilter({
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.15 }}
             onClick={() => onTagSelect(null)}
-            className="text-xs px-2.5 py-1 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium cursor-pointer"
+            className="text-[13px] px-3 py-1 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium cursor-pointer hover:bg-zinc-700 dark:hover:bg-zinc-300 transition-colors duration-150"
           >
             &times; {activeTag}
           </motion.button>
         )}
       </AnimatePresence>
-      {tags
+      {visible
         .filter((t) => t.tag !== activeTag)
-        .slice(0, 20)
+        .slice(0, 12)
         .map(({ tag, count }) => (
           <button
             key={tag}
             onClick={() => onTagSelect(tag)}
-            className="text-xs px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors duration-150 cursor-pointer"
+            className="text-[13px] px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-600 hover:text-zinc-900 dark:hover:text-zinc-200 transition-all duration-150 cursor-pointer"
           >
             {tag}
-            <span className="ml-1 text-zinc-400 dark:text-zinc-500">
+            <span className="ml-1.5 text-zinc-400 dark:text-zinc-600 text-[11px]">
               {count}
             </span>
           </button>

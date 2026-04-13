@@ -34,7 +34,7 @@ export function Feed({ bookmarks }: { bookmarks: Bookmark[] }) {
         onTagSelect={setActiveTag}
       />
 
-      <div className="space-y-1">
+      <div className="space-y-6">
         <AnimatePresence mode="popLayout">
           {filtered.map((bookmark, i) => (
             <BookmarkRow
