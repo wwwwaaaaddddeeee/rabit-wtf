@@ -11,27 +11,30 @@ export function BookmarkCard({
   onTagClick: (tag: string) => void;
 }) {
   return (
-    <article className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
+    <article className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
       <a
         href={bookmark.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="block p-4 sm:p-5 transition-colors duration-150 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+        className="block p-4 sm:p-5 transition-colors duration-150 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-zinc-400 dark:focus-visible:ring-offset-zinc-950"
       >
         <div className="flex items-center gap-2.5 mb-3">
-          <span className="text-[12px] font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+          <span className="text-[12px] font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
             {bookmark.domain}
           </span>
-          <span className="text-zinc-300 dark:text-zinc-700 text-[10px]">
+          <span
+            className="text-zinc-400 dark:text-zinc-600 text-[10px]"
+            aria-hidden="true"
+          >
             &middot;
           </span>
-          <span className="text-[12px] text-zinc-400 dark:text-zinc-600">
+          <span className="text-[12px] text-zinc-500 dark:text-zinc-400">
             {formatDate(bookmark.created)}
           </span>
         </div>
 
         {bookmark.excerpt && (
-          <p className="text-[14px] text-zinc-600 dark:text-zinc-400 mb-4 leading-relaxed line-clamp-3">
+          <p className="text-[14px] text-zinc-600 dark:text-zinc-300 mb-4 leading-relaxed line-clamp-3">
             {bookmark.excerpt}
           </p>
         )}
@@ -60,11 +63,13 @@ export function BookmarkCard({
           {bookmark.aiTags.map((tag) => (
             <button
               key={tag}
+              type="button"
               onClick={(e) => {
                 e.preventDefault();
                 onTagClick(tag);
               }}
-              className="text-[11px] px-2.5 py-1 rounded-full border border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors duration-150 cursor-pointer"
+              aria-label={`Show bookmarks tagged ${tag}`}
+              className="text-[11px] px-2.5 py-1 rounded-full border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-400 dark:hover:border-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-zinc-400 dark:focus-visible:ring-offset-zinc-950 transition-colors duration-150 cursor-pointer"
             >
               {tag}
             </button>

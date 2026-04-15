@@ -1,7 +1,22 @@
 @import "tailwindcss";
 
+/* Match UA scrollbars / form controls to page theme (see layout `scheme-light` / `dark:scheme-dark`). */
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+  }
+}
+
 /* Fix iOS touch events for interactive elements */
-button, [role="button"] {
+button,
+[role="button"],
+a[href] {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -9,6 +24,36 @@ button, [role="button"] {
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
+  /* Design tokens: contrast-tuned for WCAG AA on white / zinc-950 surfaces */
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-zinc-950);
+  --color-primary: var(--color-zinc-900);
+  --color-primary-foreground: var(--color-zinc-50);
+  --color-secondary: var(--color-zinc-100);
+  --color-secondary-foreground: var(--color-zinc-900);
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-white);
+  --color-accent: var(--color-zinc-100);
+  --color-accent-foreground: var(--color-zinc-900);
+  --color-input: var(--color-zinc-200);
+  /* Ring visible on both light + dark page backgrounds */
+  --color-ring: var(--color-zinc-500);
+}
+
+/* Dark mode: align component tokens with `dark:` page chrome (zinc-950). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--color-zinc-950);
+    --color-foreground: var(--color-zinc-50);
+    --color-primary: var(--color-zinc-100);
+    --color-primary-foreground: var(--color-zinc-950);
+    --color-secondary: var(--color-zinc-800);
+    --color-secondary-foreground: var(--color-zinc-50);
+    --color-accent: var(--color-zinc-800);
+    --color-accent-foreground: var(--color-zinc-50);
+    --color-input: var(--color-zinc-600);
+    --color-ring: var(--color-zinc-300);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

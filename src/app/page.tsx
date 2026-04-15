@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getBookmarks } from "@/lib/bookmarks";
 import { Feed } from "@/components/feed";
+import { ProjectAttribution } from "@/components/project-attribution";
 import siteHeaderIcon from "./site-header-icon.png";
 
 export const dynamic = "force-dynamic";
@@ -28,9 +29,10 @@ export default async function Home() {
             />
             rabit.wtf
           </h1>
-          <p className="text-sm text-zinc-400 dark:text-zinc-500 mt-2">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2">
             things found on the internet
           </p>
+          <ProjectAttribution />
         </header>
 
         <Feed bookmarks={bookmarks} />
