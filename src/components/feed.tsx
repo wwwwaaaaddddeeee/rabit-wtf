@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import type { Bookmark } from "@/lib/types";
-import { BookmarkRow } from "./bookmark-row";
+import { BookmarkCard } from "./bookmark-row";
 import { TagFilter } from "./tag-filter";
 
 export function Feed({ bookmarks }: { bookmarks: Bookmark[] }) {
@@ -33,12 +33,11 @@ export function Feed({ bookmarks }: { bookmarks: Bookmark[] }) {
         onTagSelect={setActiveTag}
       />
 
-      <div className="space-y-6">
-        {filtered.map((bookmark, i) => (
-          <BookmarkRow
+      <div className="space-y-4">
+        {filtered.map((bookmark) => (
+          <BookmarkCard
             key={bookmark.id}
             bookmark={bookmark}
-            index={i}
             onTagClick={setActiveTag}
           />
         ))}
